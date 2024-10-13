@@ -75,9 +75,9 @@ class ReseController extends Controller
 
         if ($user->favorites()->where('shop_id', $shop_id)->exists()) {
             //existsはレコードがあるか確認してくれる
-            $user->favorites()->detach($shop_id);//あれば解除
+            $user->favorites()->detach($shop_id);//あれば解除する
         } else {
-            $user->favorites()->attach($shop_id);//なければ登録
+            $user->favorites()->attach($shop_id);//なければ登録する
         }
 
         return redirect()->back();
