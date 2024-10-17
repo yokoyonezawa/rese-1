@@ -11,7 +11,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [LoginController::class,'getLogout']);
 
     Route::get('/', [ReseController::class, 'shop_all']);
-    Route::get('/thanks', [LoginController::class, 'thanks']);
+
     Route::post('/done', [ReseController::class, 'done']);
     Route::get('/mypage', [ReseController::class, 'mypage'])->name('mypage');
 
@@ -28,3 +28,4 @@ Route::get('/login', [LoginController::class,'getLogin'])->name('login');
 Route::post('/login', [LoginController::class,'postLogin']);
 Route::get('/register', [RegisterController::class,'getRegister'])->name('register');
 Route::post('/register', [RegisterController::class,'postRegister'])->name('register.post');
+Route::get('/thanks', [RegisterController::class, 'thanks']);

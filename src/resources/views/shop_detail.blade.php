@@ -6,6 +6,7 @@
 
 <div class="shop__content">
     <div class="shop__name">
+        <button type="button" onClick="history.back()">戻る</button>
         <h2>{{ $shop->name }}</h2>
     </div>
     <div class="shop__img">
@@ -63,7 +64,7 @@
                 <div class="shop-name__conf">Shop</div>
                 <div class="date__conf">Date</div>
                 <div class="time__conf">Time</div>
-                <button class="reservation_conf">Number</button>
+                <div class="reservation_conf">Number</div>
             </div>
             <div class="reservation__btn">
                 <button type="submit" name="reservation">予約する</button>
