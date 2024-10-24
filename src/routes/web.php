@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/reservation/cancel/{id}', [ReseController::class, 'cancelReservation']);
 
+    Route::get('/reservation/edit/{id}', [ReseController::class, 'editReservation'])->name('reservation.edit');
+    Route::put('/reservation/update/{id}', [ReseController::class, 'updateReservation'])->name('reservation.update');
+
 
 });
 

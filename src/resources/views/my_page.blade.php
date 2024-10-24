@@ -17,6 +17,10 @@
             @foreach($reservations as $reservation)
             <div class="reservation__item">
                 <p>予約{{ $loop->iteration }}</p>
+                <!-- 予約変更ボタン -->
+                <form action="{{ route('reservation.edit', ['id' => $reservation->id]) }}"   method="GET">
+                    <button type="submit">予約の変更</button>
+                </form>
                 <form action="/reservation/cancel/{{ $reservation->id }}" method="POST">
                     @csrf
                     @method('DELETE')

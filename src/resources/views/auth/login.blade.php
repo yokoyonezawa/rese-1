@@ -15,9 +15,15 @@
         @csrf
         <div class="login_content">
             Email<input type="email" name="email" value="{{ old('email') }}">
+            @error('email')
+            <p>{{ $message }}</p>
+            @enderror
         </div>
         <div class="login__content">
             Password<input type="password" name="password">
+            @error('password')
+            <p>{{ $message }}</p>
+            @enderror
         </div>
         <div class="btn-container">
             <input type="submit" value="ログイン">
