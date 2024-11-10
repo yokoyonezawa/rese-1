@@ -31,6 +31,10 @@
                 <p>Time: {{ $reservation->time }}</p>
                 <p>Number: {{ $reservation->number }}</p>
             </div>
+            <div class="rating-page">
+                <button onclick="location.href='{{ route('ratings.create', ['shop_id' => $reservation->shop->id]) }}'">評価する
+                </button>
+            </div>
             @endforeach
         </div>
     </div>
@@ -56,6 +60,17 @@
             </div>
         </div>
     </div>
+    <div class="qr-code__content">
+        <h2>来店時にこちらのQRコードをスタッフへ提示してください</h2>
+        <a href="http://localhost/qr-code" target="_blank">こちら</a>
+        <form action="/verify-qr-code" method="POST">
+        @csrf
+        <input type="hidden" name="user_id" value="">
+            <button type="submit">QRコードを確認</button>
+        </form>
+    </div>
+
+
 
 </div>
 

@@ -24,4 +24,11 @@ class Shop extends Model
         return $this->belongsTo(User::class, 'favorites');
     }
 
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+
 }

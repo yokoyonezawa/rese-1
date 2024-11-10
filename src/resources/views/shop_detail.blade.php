@@ -60,12 +60,6 @@
                         <option value="10">10人</option>
                     </select>
             </div>
-            <div class="reservation__confirm">
-                <div class="shop-name__conf">Shop</div>
-                <div class="date__conf">Date</div>
-                <div class="time__conf">Time</div>
-                <div class="reservation_conf">Number</div>
-            </div>
             <div class="reservation__btn">
                 <button type="submit" name="reservation">予約する</button>
             </div>

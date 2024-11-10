@@ -11,6 +11,7 @@ use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Http\Requests\ReseRequest;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReseController extends Controller
 {
