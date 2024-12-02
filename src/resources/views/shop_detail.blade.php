@@ -10,7 +10,7 @@
         <h2>{{ $shop->name }}</h2>
     </div>
     <div class="shop__img">
-        <img src="{{ $shop->image_url }}" alt="{{ $shop->name }}" />
+        <img src="{{ Str::startsWith($shop->image_url, 'http') ? $shop->image_url : asset('storage/' . $shop->image_url) }}" alt="{{ $shop->name }}" />
     </div>
     <div class="shop__area">{{ $shop->area->name }}</div>
     <div class="shop_genre">{{ $shop->genre->name }}</div>

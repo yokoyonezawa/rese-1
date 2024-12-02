@@ -17,19 +17,15 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-protected function schedule(Schedule $schedule)
-{
-    // 予約当日の予約を取得
-    $schedule->call(function () {
-        $reservations = Reservation::whereDate('date', Carbon::today()->format('Y-m-d'))
-                            ->where('time', '>=', Carbon::now()->format('H:i'))
-                            ->get();
 
-        foreach ($reservations as $reservation) {
-            $reservation->user->notify(new ReservationReminder($reservation)); // ユーザーに通知
-        }
-    })->dailyAt('08:00'); // 毎朝8時に実行
-}
+
+    protected function schedule(Schedule $schedule)
+    {
+        // 専用のコマンドクラスを呼び出し
+        // $schedule->command('send:daily-reminders')->dailyAt('08:00'); // 毎朝8時
+        $schedule->command('send:daily-reminders')->everyMinute(); // 毎分実行
+    }
+
 
 
     /**

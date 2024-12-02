@@ -62,7 +62,7 @@
     </div>
     <div class="qr-code__content">
         <h2>来店時にこちらのQRコードをスタッフへ提示してください</h2>
-        <a href="http://localhost/qr-code" target="_blank">こちら</a>
+        <a href="{{ route('qr.generate', ['reservation_id' => $reservation->id]) }}" target="_blank">こちら</a>
         <form action="/verify-qr-code" method="POST">
         @csrf
         <input type="hidden" name="user_id" value="">

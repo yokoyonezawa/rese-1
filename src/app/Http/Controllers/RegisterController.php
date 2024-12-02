@@ -9,6 +9,7 @@ use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -26,8 +27,15 @@ class RegisterController extends Controller
                 'password' => Hash::make($request['password']),
             ]);
 
-            // メール認証通知を送信
-            $user->sendEmailVerificationNotification();
+            // メール認証が完了したものとして扱うため、email_verified_at を現在の日時に設定
+            $user->email_verified_at = Carbon::now();
+            $user->save();
+
+            // // メール認証通知を送信
+            // $user->sendEmailVerificationNotification();
+
+            // 新規登録ユーザーに "user" ロールを付与
+            $user->assignRole('user');
 
             return redirect()->route('thanks');
         } catch (\Throwable $th) {

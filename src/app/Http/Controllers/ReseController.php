@@ -87,6 +87,7 @@ class ReseController extends Controller
 
 
 
+
     public function shop_detail($shop_id)
     {
         $shop = Shop::with(['area', 'genre'])->findOrFail($shop_id);

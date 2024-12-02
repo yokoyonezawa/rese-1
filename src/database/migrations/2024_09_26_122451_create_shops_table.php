@@ -22,6 +22,10 @@ class CreateShopsTable extends Migration
             $table->string('image_url');
             $table->timestamps();
         });
+
+        Schema::table('shops', function (Blueprint $table) {
+            $table->string('image_url')->nullable()->change();
+        });
     }
 
     /**

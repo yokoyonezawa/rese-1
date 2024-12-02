@@ -8,6 +8,52 @@ use App\Http\Controllers\ReseController;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\VerifyQrCodeController;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Admin\StoreRepresentativeController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StoreRepresentative\ShopManagementController;
+
+
+
+// 管理者専用ページ
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.admin_dashboard');
+
+    // 店舗代表者登録フォームのルート
+    Route::get('/admin/store-representatives/create', [StoreRepresentativeController::class, 'create'])->name('admin.store-representatives.create');
+
+    // 店舗代表者を保存するルート
+    Route::post('/admin/store-representatives', [StoreRepresentativeController::class, 'store'])->name('admin.store-representatives.store');
+});
+
+
+Route::middleware(['auth', 'role:store-representative'])->group(function () {
+    Route::get('/store/dashboard', [ShopManagementController::class, 'dashboard'])
+        ->name('store.dashboard'); // ダッシュボード表示
+
+    Route::get('/store/shops/create', [ShopManagementController::class, 'create'])
+        ->name('store.shops.create'); // 店舗作成フォーム表示
+
+    Route::post('/store/shops', [ShopManagementController::class, 'store'])
+        ->name('store.shops.store'); // 店舗作成処理
+
+    Route::get('/store/shops/{shop}/edit', [ShopManagementController::class, 'edit'])->name('store.shops.edit');
+
+    Route::put('/store/shops/{shop}', [ShopManagementController::class, 'update'])->name('store.shops.update');
+
+    Route::get('/store/shops/{shop}/reservations', [ShopManagementController::class, 'reservations'])->name('store.reservations.index');
+});
+
+
+
+// 利用者専用ページ
+Route::middleware(['role:user'])->group(function () {
+    Route::get('/user/dashboard', function () {
+        return '利用者専用ダッシュボード';
+    });
+});
+
+
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -31,7 +77,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/reservation/update/{id}', [ReseController::class, 'updateReservation'])->name('reservation.update');
 
     // QRコードの生成ルート
-    Route::get('/qr-code', [VerifyQrCodeController::class, 'generate'])->name('qr.code');
+    // Route::get('/qr-code', [VerifyQrCodeController::class, 'generate'])->name('qr.code');
+    Route::get('/qr-code/{reservation_id}', [VerifyQrCodeController::class, 'generate'])->name('qr.generate');
     // QRコード照合のルート
     Route::post('/verify-qr-code', [VerifyQrCodeController::class, 'verify'])->name('qr.verify');
 
@@ -47,6 +94,7 @@ Route::post('/login', [LoginController::class,'postLogin']);
 Route::get('/register', [RegisterController::class,'getRegister'])->name('register');
 Route::post('/register', [RegisterController::class,'postRegister'])->name('register.post');
 Route::get('/thanks', [RegisterController::class, 'thanks']);
+
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

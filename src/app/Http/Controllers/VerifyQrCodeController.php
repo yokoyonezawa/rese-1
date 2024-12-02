@@ -9,13 +9,17 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class VerifyQrCodeController extends Controller
 {
 
-    public function generate(Request $request)
+    public function generate(Request $request, $reservation_id)
     {
-        // 利用者のIDや情報を取得
-        $userId = $request->user()->id; // ログインユーザーのIDを使用
+        // ログイン中のユーザーの予約情報を取得
+        $reservation = $request->user()->reservations()->find($reservation_id);
 
-        // QRコードの生成
-        $qrCode = QrCode::size(300)->generate(route('qr.verify', ['user_id' => $userId])); // ユーザーIDをQRコードに埋め込む
+        if (!$reservation) {
+            abort(404, 'Reservation not found');
+        }
+
+        // QRコードの生成 (予約IDを埋め込む)
+        $qrCode = QrCode::size(300)->generate(route('qr.verify', ['reservation_id' => $reservation->id]));
 
         return view('qr_code', ['qrCode' => $qrCode]);
     }
@@ -23,17 +27,18 @@ class VerifyQrCodeController extends Controller
 
     public function verify(Request $request)
     {
-        $userId = $request->input('user_id'); // QRコードから取得したユーザーID
+        $reservationId = $request->input('reservation_id'); // QRコードから取得した予約ID
 
-        // ユーザーの存在を確認
-        $user = User::find($userId);
+        // 予約情報の確認
+        $reservation = \App\Models\Reservation::find($reservationId);
 
-        if ($user) {
-            // 照合成功の処理
-            return response()->json(['message' => 'ユーザー確認成功', 'user' => $user]);
+        if ($reservation && $reservation->user_id === $request->user()->id) {
+            // 照合成功
+            return response()->json(['message' => '予約確認成功', 'reservation' => $reservation]);
         } else {
-            // 照合失敗の処理
-            return response()->json(['message' => 'ユーザー確認失敗'], 404);
+            // 照合失敗
+            return response()->json(['message' => '予約確認失敗'], 404);
         }
     }
+
 }

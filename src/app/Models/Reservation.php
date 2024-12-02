@@ -26,4 +26,19 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getFormattedDateAttribute()
+    {
+        return $this->date->format('Y年m月d日');
+    }
+
+    public function getFormattedTimeAttribute()
+    {
+        return date('H:i', strtotime($this->time));
+    }
+
+    protected $casts = [
+        'date' => 'datetime', // Carbonインスタンスとして扱う
+    ];
+
 }

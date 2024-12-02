@@ -36,7 +36,7 @@
     @foreach($shops as $shop)
     <div class="shop__card">
         <div class="shop__img">
-            <img src="{{ $shop->image_url }}" alt="{{ $shop->name }}" />
+            <img src="{{ Str::startsWith($shop->image_url, 'http') ? $shop->image_url : asset('storage/' . $shop->image_url) }}" alt="{{ $shop->name }}" />
         </div>
         <div class="shop__content">
             <div class="shop__name">
