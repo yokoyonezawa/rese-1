@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\StoreRepresentativeController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StoreRepresentative\ShopManagementController;
+use App\Http\Controllers\AdminNotificationController;
+use App\Http\Controllers\PaymentController;
 
 
 
@@ -24,6 +26,11 @@ Route::middleware(['role:admin'])->group(function () {
 
     // 店舗代表者を保存するルート
     Route::post('/admin/store-representatives', [StoreRepresentativeController::class, 'store'])->name('admin.store-representatives.store');
+
+    Route::get('/admin/notifications/create', [AdminNotificationController::class, 'create'])->name('admin.notifications.create');
+
+    Route::post('/admin/notifications', [AdminNotificationController::class, 'store'])->name('admin.notifications.store');
+
 });
 
 
@@ -85,6 +92,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/rating/{shop_id}', [RatingController::class, 'create'])->name('ratings.create');
     Route::post('/rating/{shop_id}', [RatingController::class, 'store'])->name('ratings.store');
 
+    Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+    Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
 
 
 });
