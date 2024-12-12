@@ -53,12 +53,12 @@ Route::middleware(['auth', 'role:store-representative'])->group(function () {
 
 
 
-// 利用者専用ページ
-Route::middleware(['role:user'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return '利用者専用ダッシュボード';
-    });
-});
+// // 利用者専用ページ
+// Route::middleware(['role:user'])->group(function () {
+//     Route::get('/user/dashboard', function () {
+//         return '利用者専用ダッシュボード';
+//     });
+// });
 
 
 
@@ -85,7 +85,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // QRコードの生成ルート
     // Route::get('/qr-code', [VerifyQrCodeController::class, 'generate'])->name('qr.code');
-    Route::get('/qr-code/{reservation_id}', [VerifyQrCodeController::class, 'generate'])->name('qr.generate');
+    Route::get('/qr-code/{reservation_id}', [VerifyQrCodeController::class, '/qr-code/{reservation_id}'])->name('qr.generate');
     // QRコード照合のルート
     Route::post('/verify-qr-code', [VerifyQrCodeController::class, 'verify'])->name('qr.verify');
 
