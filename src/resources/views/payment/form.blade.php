@@ -3,6 +3,7 @@
 <head>
     <title>Stripe Payment</title>
     <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 </head>
 <body>
     @if (session('success'))

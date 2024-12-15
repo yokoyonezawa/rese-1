@@ -5,6 +5,9 @@
 - 随時、店舗登録が可能。(削除も可能)
 
 
+![トップ画](src/docs/homepage.png)
+
+
 ## 誰でも簡単に予約でき、店舗側も簡単に予約管理ができるアプリを作成したかった。
 お気に入り機能で気になる店舗を保存でき、店舗詳細ページでは日時と人数を選ぶだけで簡単に予約を取れると便利で多くの方が使いやすいと思い作成。
 ややこしい機能がないのでどんな方でも気軽に利用していただけるようなアプリが喜ばれると思いましいた。
@@ -89,11 +92,12 @@
 ![テーブル設計](src/docs/table_design2.png)
 ![テーブル設計](src/docs/table_design3.png)
 ![テーブル設計](src/docs/table_design4.png)
-![テーブル設計](src/docs/table_design5.png)
-![テーブル設計](src/docs/table_design6.png)
+
+
+
 
 ## ER図
-![テーブル設計](src/docs/er.png)
+![ER図](src/docs/er.png)
 
 # 環境構築
 
@@ -112,7 +116,7 @@
 ## 環境構築手順
 
 ### 1.リポジトリをクローン
-   以下のコマンドでプロジェクトをクローンします：
+   以下のコマンドでプロジェクトをクローンします。
 
    git clone https://github.com/yokoyonezawa/rese-1
 
@@ -121,9 +125,9 @@
 
 APP_NAME=Laravel
 APP_ENV=local
-APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+APP_KEY=base64:G2V0j+zJtMHf5EHUJ+VX5wQ9JtyOjd5JidSLNLPnSBA=
 APP_DEBUG=true
-APP_URL=http://localhost:8000
+APP_URL=http://192.168.3.30:8000
 
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -131,6 +135,19 @@ DB_PORT=3306
 DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=rinnyomu.komachi@gmail.com
+MAIL_PASSWORD="xvts zixz qmic ywct"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=rinnyomu.komachi@gmail.com
+MAIL_FROM_NAME="YOUKO"
+
+STRIPE_SECRET_KEY=sk_test_51QShsSRwPvlvtVmRvU5AoPdf7vAA5PgeJXpkMGAMTxJeqkjdaNynsT7PanyLq79FRAYqij63hG2o86Lm3O1T0XNE00DMVDut1u
+STRIPE_PUBLISHABLE_KEY=pk_test_51QShsSRwPvlvtVmRSNz23C0NtHmOZAXd0ZDwBmV2kLoQZhhHRMw53wmCEGPbEqDgWfju5ouCLtlErVOUAagxl57R00H9UPXBC1
+
 
 ### 3. Dockerコンテナをビルドして起動
 次のコマンドを実行して、コンテナを構築して起動します。

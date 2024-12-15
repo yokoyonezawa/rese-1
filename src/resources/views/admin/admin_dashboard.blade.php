@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="{{ asset('css/admin_dashboard.css') }}">
+
 @section('content')
+<div class="admin__ttl">
     <h1>店舗代表者の登録</h1>
+</div>
 
     <form action="{{ route('admin.store-representatives.store') }}" method="POST">
         @csrf
@@ -27,5 +31,11 @@
 
         <button type="submit">店舗代表者を作成</button>
     </form>
+
+<div class="notification-btn">
+    <form action="{{ route('admin.notifications.create') }}" method="GET">
+        <button type="submit" class="btn btn-notification">お知らせメールを送信</button>
+    </form>
+</div>
 @endsection
 

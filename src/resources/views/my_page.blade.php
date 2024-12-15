@@ -14,11 +14,11 @@
         </div>
 
         <div class="reservation__content">
-            @foreach($reservations as $reservation)
+        @forelse($reservations as $reservation)
             <div class="reservation__item">
                 <p>予約{{ $loop->iteration }}</p>
                 <!-- 予約変更ボタン -->
-                <form action="{{ route('reservation.edit', ['id' => $reservation->id]) }}"   method="GET">
+                <form action="{{ route('reservation.edit', ['id' => $reservation->id]) }}" method="GET">
                     <button type="submit">予約の変更</button>
                 </form>
                 <form action="/reservation/cancel/{{ $reservation->id }}" method="POST">
@@ -32,18 +32,25 @@
                 <p>Number: {{ $reservation->number }}</p>
             </div>
             <div class="rating-page">
-                <button onclick="location.href='{{ route('ratings.create', ['shop_id' => $reservation->shop->id]) }}'">評価する
-                </button>
+                <button onclick="location.href='{{ route('ratings.create', ['shop_id' => $reservation->shop->id]) }}'">評価する</button>
             </div>
-            @endforeach
-        </div>
+            <div class="payment">
+                <form action="{{ route('payment.form') }}" method="GET">
+                    <button type="submit" class="btn btn-primary">お支払いページに進む</button>
+                </form>
+            </div>
+            @empty
+                <p>現在予約はありません。</p>
+        @endforelse
+    </div>
+
     </div>
 
     <div class="favorite__shops">
         <div class="favorite__ttl">
             <h2>お気に入り店舗</h2>
             <div class="shop__list">
-                @foreach($favoriteShops as $shop)
+                @forelse($favoriteShops as $shop)
                 <div class="shop__item">
                     <div class="shop__content">
                         <div class="shop__name">
@@ -56,19 +63,22 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                    <p>現在お気に入り店舗はありません。</p>
+                @endforelse
             </div>
         </div>
     </div>
+
     <div class="qr-code__content">
         <h2>来店時にこちらのQRコードをスタッフへ提示してください</h2>
-        <a href="{{ route('qr.generate', ['reservation_id' => $reservation->id]) }}" target="_blank">こちら</a>
-        <form action="/verify-qr-code" method="POST">
-        @csrf
-        <input type="hidden" name="user_id" value="">
-            <button type="submit">QRコードを確認</button>
-        </form>
+        @forelse($reservations as $reservation)
+            <a href="{{ route('qr.generate', ['reservation_id' => $reservation->id]) }}" target="_blank">こちら</a>
+        @empty
+            <p>予約がないためQRコードは発行できません。</p>
+        @endforelse
     </div>
+
 
 
 

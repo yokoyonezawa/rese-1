@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="{{ asset('css/reservation_edit.css') }}">
+
 @section('content')
 <div class="reservation-edit">
     <h2>{{ $reservation->shop->name }}の予約を変更する</h2>

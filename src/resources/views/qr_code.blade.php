@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="{{ asset('css/qr_code.css') }}">
     <title>QRコード</title>
 </head>
 <body>

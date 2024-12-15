@@ -53,16 +53,6 @@ Route::middleware(['auth', 'role:store-representative'])->group(function () {
 
 
 
-// // 利用者専用ページ
-// Route::middleware(['role:user'])->group(function () {
-//     Route::get('/user/dashboard', function () {
-//         return '利用者専用ダッシュボード';
-//     });
-// });
-
-
-
-
 Route::middleware(['auth', 'verified'])->group(function () {
 
 
@@ -84,8 +74,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/reservation/update/{id}', [ReseController::class, 'updateReservation'])->name('reservation.update');
 
     // QRコードの生成ルート
-    // Route::get('/qr-code', [VerifyQrCodeController::class, 'generate'])->name('qr.code');
-    Route::get('/qr-code/{reservation_id}', [VerifyQrCodeController::class, '/qr-code/{reservation_id}'])->name('qr.generate');
+    Route::get('/qr-code/{reservation_id}', [VerifyQrCodeController::class, 'generate'])->name('qr.generate');
+    Route::post('/verify-qr-code', [VerifyQrCodeController::class, 'verify'])->name('qr.verify');
+
     // QRコード照合のルート
     Route::post('/verify-qr-code', [VerifyQrCodeController::class, 'verify'])->name('qr.verify');
 
@@ -102,7 +93,7 @@ Route::get('/login', [LoginController::class,'getLogin'])->name('login');
 Route::post('/login', [LoginController::class,'postLogin']);
 Route::get('/register', [RegisterController::class,'getRegister'])->name('register');
 Route::post('/register', [RegisterController::class,'postRegister'])->name('register.post');
-Route::get('/thanks', [RegisterController::class, 'thanks']);
+Route::get('/thanks', [RegisterController::class, 'thanks'])->name('thanks');
 
 
 Route::get('/email/verify', function () {

@@ -4,19 +4,24 @@
 
 @section('content')
 
+<div class="container">
 <div class="shop__content">
     <div class="shop__name">
-        <button type="button" onClick="history.back()">戻る</button>
+        <button type="button" onClick="history.back()">＜</button>
         <h2>{{ $shop->name }}</h2>
     </div>
     <div class="shop__img">
         <img src="{{ Str::startsWith($shop->image_url, 'http') ? $shop->image_url : asset('storage/' . $shop->image_url) }}" alt="{{ $shop->name }}" />
     </div>
-    <div class="shop__area">{{ $shop->area->name }}</div>
-    <div class="shop_genre">{{ $shop->genre->name }}</div>
+    <div class="shop__area">#{{ $shop->area->name }}</div>
+    <div class="shop_genre">#{{ $shop->genre->name }}</div>
     <div class="shop__overview">{{ $shop->detail }}</div>
 </div>
 <div class="shop__content">
+    <div class="shop__content-2">
+    <div class="reservation__ttl">
+        <h2>予約</h2>
+    </div>
     <form action="/done" method="post">
         @csrf
         <input type="hidden" name="shop_id" value="{{ $shop->id }}">
@@ -65,6 +70,9 @@
             </div>
         </div>
     </form>
+    </div>
 </div>
+</div>
+
 
 @endsection

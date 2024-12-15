@@ -1,46 +1,115 @@
-/* メニューが表示されるまで非表示に */
-.menu-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100vh;
-    height: 100vh;
-    background-color: white;
-    color: blue;
-    /* z-index: 1000;
-    transform: translateX(100%);
-    transition: transform 0.3s ease; */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
 }
 
-/* メニュー内のリンクリスト */
 .menu-list {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    color: #007BFF;
+    background-color: #ffffff;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     list-style: none;
-    padding: 20px;
+    z-index: 1000;
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #007BFF;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-icon span {
+    display: block;
+    width: 60%;
+    height: 4px;
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+
+.site-title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #007BFF;
+    margin: 0;
+    text-align: left;
+}
+
+/* チェックボックスがチェックされているときにメニューを表示 */
+.menu-checkbox:checked~.menu-list {
+    display: flex;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.close-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #007BFF;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-align: center;
 }
 
 .menu-list li {
-    margin: 20px 0;
+    font-size: 24px;
 }
 
-.menu-list li a {
-    color: #18AEFC;
+.menu-list a {
     text-decoration: none;
-    font-size: 18px;
+    color: #007BFF;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
-/* メニューがチェックされている場合に表示 */
-.menu-checkbox:checked+.menu-popup {
+
+.menu-icon span {
     display: block;
-    transform: translateX(0);
+    width: 100%;
+    height: 4px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
 }
 
-/* 閉じるボタン */
-.close-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 30px;
-    color: rgb(32, 7, 255);
-    cursor: pointer;
+
+
+.menu-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-checkbox {
+    display: none;
 }

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="{{ asset('css/notifications_create.css') }}">
+
 @section('content')
-<div>
+<div class="mail_content">
     <h1>お知らせメールの送信</h1>
     <form method="POST" action="{{ route('admin.notifications.store') }}">
         @csrf

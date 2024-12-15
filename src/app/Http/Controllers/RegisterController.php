@@ -43,4 +43,9 @@ class RegisterController extends Controller
         }
     }
 
+    public function thanks()
+    {
+        return view('thanks');
+    }
+
 }

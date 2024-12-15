@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+
 <h1>{{ $shop->name }} の予約情報</h1>
 
 <table>
@@ -17,4 +19,7 @@
             </tr>
         @endforeach
     </tbody>
+    <form action="{{ route('store.dashboard') }}" method="get">
+        <button type="submit" class="btn-back">戻る</button>
+    </form>
 </table>

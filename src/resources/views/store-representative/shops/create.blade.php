@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="{{ asset('css/create.css') }}">
+
 @section('content')
 <div class="container">
     <h1>店舗情報作成</h1>

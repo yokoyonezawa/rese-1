@@ -7,28 +7,85 @@
 .shop__list{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 .shop__card {
     width: calc(25% - 20px);
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
     background-color: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
-
 
 .shop__img img{
     width: 100%;
 }
 
+.shop__name {
+    margin-bottom: 5px;
+}
+
 .shop__content {
     padding:15px 25px;
 }
+
+.shop__area,
+.shop_genre {
+    display: inline-block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.shop__detail-btn input {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px 15px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.shop__detail-btn input:hover {
+    background-color: #0056b3;
+}
+
 .favorite-btn {
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
+    margin-right: 10px;
+}
+
+.shop__btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-admin {
+    background-color: #2458e8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+
+.store-representative-btn button{
+    background-color: #2458e8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
 }

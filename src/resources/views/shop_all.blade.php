@@ -5,6 +5,7 @@
 @section('content')
 @if( Auth::check() )
 
+
 <!-- 検索フィルター -->
 <div class="search-filter">
     <form id="search-form" action="{{ url('/') }}" method="GET">
@@ -30,6 +31,30 @@
     </form>
 </div>
 
+@if(Auth::check() && Auth::user()->hasRole('admin'))
+    <div class="admin-btn">
+        <form action="{{ route('admin.admin_dashboard') }}" method="GET">
+            @csrf
+            <button type="submit" class="btn btn-admin">
+                管理者ダッシュボードへ
+            </button>
+        </form>
+    </div>
+@endif
+
+@if(Auth::check() && Auth::user()->hasRole('store-representative'))
+    <div class="store-representative-btn">
+        <form action="{{ route('store.dashboard') }}" method="GET">
+            @csrf
+            <button type="submit" class="btn btn-store-representative">
+                店舗ダッシュボードへ
+            </button>
+        </form>
+    </div>
+@endif
+
+
+
 
 <div class="shop__all">
 <div class="shop__list">
@@ -44,25 +69,27 @@
             </div>
             <div class="shop__area">#{{ $shop->area->name }}</div>
             <div class="shop_genre">#{{ $shop->genre->name }}</div>
+        </div>
 
+        <div class="shop__btn">
             <div class="shop__detail-btn">
                 <input type="button" onclick="location.href='{{ route('shop_detail', ['shop_id' => $shop->id]) }}'" value="詳しく見る">
             </div>
-        </div>
 
-        <div class="shop__favorite">
-            <form action="{{ route('favorite.toggle', ['shop_id' => $shop->id]) }}" method="POST">
-                @csrf
-                @if(Auth::user()->favorites->contains($shop->id))
-                    <button type="submit" class="favorite-btn">
+            <div class="shop__favorite">
+                <form action="{{ route('favorite.toggle', ['shop_id' => $shop->id]) }}" method="POST">
+                    @csrf
+                    @if(Auth::user()->favorites->contains($shop->id))
+                        <button type="submit" class="favorite-btn">
                         ❤️
-                    </button>
-                @else
-                    <button type="submit" class="favorite-btn">
-                        🤍
-                    </button>
-                @endif
+                        </button>
+                    @else
+                        <button type="submit" class="favorite-btn">
+                            🤍
+                        </button>
+                    @endif
             </form>
+            </div>
         </div>
 
 
