@@ -51,20 +51,16 @@ Route::middleware(['auth', 'role:store-representative'])->group(function () {
     Route::get('/store/shops/{shop}/reservations', [ShopManagementController::class, 'reservations'])->name('store.reservations.index');
 });
 
-
+Route::get('/', [ReseController::class, 'shop_all']);
+Route::get('/detail/{shop_id}', [ReseController::class, 'shop_detail'])->name('shop_detail');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-
     Route::get('/logout', [LoginController::class,'getLogout']);
-
-    Route::get('/', [ReseController::class, 'shop_all']);
-
 
     Route::post('/done', [ReseController::class, 'done']);
     Route::get('/mypage', [ReseController::class, 'mypage'])->name('mypage');
 
-    Route::get('/detail/{shop_id}', [ReseController::class, 'shop_detail'])->name('shop_detail');
 
     Route::post('/favorite/toggle/{shop_id}', [ReseController::class, 'toggleFavorite'])->name('favorite.toggle');
 

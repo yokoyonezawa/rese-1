@@ -83,6 +83,7 @@ class ReseController extends Controller
         $genres = Genre::all();
 
         return view('shop_all', compact('areas', 'genres', 'shops'));
+
     }
 
 

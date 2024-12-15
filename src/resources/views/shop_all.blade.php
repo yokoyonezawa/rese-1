@@ -3,10 +3,8 @@
 <link rel="stylesheet" href="{{ asset('css/shop_all.css') }}">
 
 @section('content')
-@if( Auth::check() )
 
 
-<!-- 検索フィルター -->
 <div class="search-filter">
     <form id="search-form" action="{{ url('/') }}" method="GET">
         <select name="area_id" id="area-select">
@@ -75,7 +73,7 @@
             <div class="shop__detail-btn">
                 <input type="button" onclick="location.href='{{ route('shop_detail', ['shop_id' => $shop->id]) }}'" value="詳しく見る">
             </div>
-
+            @if(Auth::check())
             <div class="shop__favorite">
                 <form action="{{ route('favorite.toggle', ['shop_id' => $shop->id]) }}" method="POST">
                     @csrf
@@ -90,6 +88,7 @@
                     @endif
             </form>
             </div>
+            @endif
         </div>
 
 
@@ -120,5 +119,5 @@
 
 
 
-@endif
+
 @endsection
